@@ -1,5 +1,5 @@
-CREATE DATABASE searchWork;
-USE searchWork;
+CREATE DATABASE recruitingRH;
+USE recruitingRH;
 
 CREATE TABLE professions(
 		id				bigint unsigned not null auto_increment,
