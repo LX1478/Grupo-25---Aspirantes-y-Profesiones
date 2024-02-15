@@ -11,7 +11,7 @@ INSERT INTO recruitingRH.professions(name)
     ("Linguista")
 ;
 
-INSERT INTO recruitingRH.aplicants(dni, name, surname, email, phone, urlLinkedin, dateOfBirth, sex, image, professionId)
+INSERT INTO recruitingRH.applicants(dni, name, surname, email, phone, urlLinkedin, dateOfBirth, sex, image, professionId)
 	VALUE(46234865 , "Gloria", "Medina", "gloriamedina@gmail.com", "+54 9 223 123-4567","www.linkedin.com/in/Gloria-Medina", "2000-11-02", "Femenino", "aspirant1.png", 2),
     (12345678, "Juan", "Perez", "juanperez@gmail.com", "+54 9 223 234-5678", "www.linkedin.com/in/Juan-Perez", "1995-03-15", "Masculino", "aspirant2.png", 1),
     (59765432, "María", "López", "marialopez@gmail.com", "+54 9 223 345-6789", "www.linkedin.com/in/María-López", "1998-08-20", "Femenino", "aspirant3.png", 4),

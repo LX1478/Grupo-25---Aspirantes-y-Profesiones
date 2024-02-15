@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Aplicant = sequelize.define('Aplicant', {
+    const Applicant = sequelize.define('Applicant', {
         id:{
             type: DataTypes.BIGINT.UNSIGNED,
             primaryKey: true,
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         image:{
             type: DataTypes.STRING(255),
-            allowNull: false,
+            allowNull: true,
             default: 'default.png'
         },
         professionId:{
@@ -53,26 +53,19 @@ module.exports = (sequelize, DataTypes) => {
                 model: 'Profession', 
                 key: 'id' 
               }
-        },
-        createdAt:{
-            type: DataTypes.DATE,
-        },
-        updatedAt:{
-            type: DataTypes.DATE,
-        },
-        deleteAt:{
-            type: DataTypes.DATE,
         }, 
     },{
-      tableName: 'aplicants'
+      tableName: 'applicants',
+      timestamps: true,      
+      paranoid: true, // habilita deletedAt
    })
 
-   Aplicant.associate = (models)=> { 
-    Aplicant.belongsTo(models.Profession, {
+   Applicant.associate = (models)=> { 
+    Applicant.belongsTo(models.Profession, {
         as: 'profession',
         foreignKey: 'professionId'
        })
     }
 
-   return Aplicant;
+   return Applicant;
 }

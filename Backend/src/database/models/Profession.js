@@ -10,23 +10,15 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(120),
             allowNull: false,
         },
-        createdAt:{
-            type: DataTypes.DATE,
-        },
-        updatedAt:{
-            type: DataTypes.DATE,
-        },
-        deleteAt:{
-            type: DataTypes.DATE,
-        }
     },{
       tableName: 'professions', 
-      timestamps: true
+      timestamps: true,      
+      paranoid: true, // habilita deletedAt
    })
 
  Profession.associate = (models)=> { 
-    Profession.hasMany(models.Aplicant, {
-        as: 'aplicants',
+    Profession.hasMany(models.Applicant, {
+        as: 'applicants',
         foreignKey: 'professionId'
     })
 }

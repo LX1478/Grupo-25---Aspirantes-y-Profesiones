@@ -1,34 +1,17 @@
-const { Profession } = require('../database/models');
+const { Applicant } = require('../database/models');
 
-const professionsController = {
+const applicantsController = {
     all: async(req, res) => {
         try{
-            const professions = await Profession.findAll();
+            const applicants = await Applicant.findAll();
 
             res.status(200).json({
                 meta:{
                 status:res.statusCode,
                 url: req.protocol + '://' + req.get('host') + req.url,
+                length: applicants.length
                 },
-                data: professions
-            });
-        }catch(error){
-            console.error("Error al obtener los solicitantes:", error);
-                res.status(500).json({
-                    error: "Error al procesar la solicitud"
-            });
-        }
-    },
-    detail: async(req, res) => {
-        try{
-            const profession = await Profession.findByPk(req.params.id);
-
-            res.status(200).json({
-                meta:{
-                status:res.statusCode,
-                url: req.protocol + '://' + req.get('host') + req.url,
-                },
-                data: profession
+                data: applicants
             });
         }catch(error){
             console.error("Error al obtener los solicitantes:", error);
@@ -37,13 +20,40 @@ const professionsController = {
                 });
         }
     },
+    detail: async(req, res) => {
+        try{
+            const applicant = await Applicant.findByPk(req.params.id);
+
+            res.status(200).json({
+                meta:{
+                status:res.statusCode,
+                url: req.protocol + '://' + req.get('host') + req.url,
+                },
+                data: applicant
+            });
+        }catch(error){
+            console.error("Error al obtener los solicitantes:", error);
+                res.status(500).json({
+                    error: "Error al procesar la solicitud"
+                });
+        }
+
+    },
     add: async(req, res) => {
         const { body } = req;
         try{
-            await Profession.create({
+            await Applicant.create({
+                dni: body.dni,
                 name: body.name,
+                surname: body.surname,
+                email: body.email,
+                phone: body.phone,
+                urlLinkedin: body.urlLinkedin,
+                dateOfBirth: body.dateOfBirth,
+                sex: body.sex,
+                image: req.file ? req.file.filename : 'default.png',
+                professionId: body.professionId,
             });
-
             return res.status(201).json({
                 meta: {
                     status: res.statusCode,
@@ -57,22 +67,29 @@ const professionsController = {
             });
         }
     },
-    edit: async(req, res) => {
+    edit: async (req, res) => {
         const { body } = req;
         try{
-            await Profession.update({
+            await Applicant.update({
+                dni: body.dni,
                 name: body.name,
-            },{
+                surname: body.surname,
+                email: body.email,
+                phone: body.phone,
+                urlLinkedin: body.urlLinkedin,
+                dateOfBirth: body.dateOfBirth,
+                sex: body.sex,
+                proffesionId: body.proffesionId,
+            }, {
                 where: {
-                    id: req.params.id
+                    id: req.params.id,
                 }
             });
-
-            return res.status(200).json({
+            res.status(200).json({
                 meta: {
                     status: res.statusCode,
                     url: req.protocol + '://' + req.get('host') + req.url
-                },
+                }
             });
         }catch(error){
             console.error("Error al procesar: ", error);
@@ -80,11 +97,10 @@ const professionsController = {
                 error: "Error al procesar la solicitud"
             });
         }
-
     },
-    remove: async(req, res) => {
+    remove: async (req, res) => {
         try{
-            await Profession.destroy({
+            await Applicant.destroy({
                 where: {
                     id: req.params.id,
                 }
@@ -104,4 +120,4 @@ const professionsController = {
     }
 }
 
-module.exports = professionsController;
+module.exports = applicantsController;

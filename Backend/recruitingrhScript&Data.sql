@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `aplicants`
+-- Table structure for table `applicants`
 --
 
-DROP TABLE IF EXISTS `aplicants`;
+DROP TABLE IF EXISTS `applicants`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `aplicants` (
+CREATE TABLE `applicants` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `dni` int unsigned NOT NULL,
   `name` varchar(120) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `aplicants` (
   `professionId` bigint NOT NULL,
   `createdAt` date DEFAULT NULL,
   `updatedAt` date DEFAULT NULL,
-  `deleteAt` date DEFAULT NULL,
+  `deletedAt` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `dni` (`dni`),
   UNIQUE KEY `email` (`email`),
@@ -45,13 +45,13 @@ CREATE TABLE `aplicants` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `aplicants`
+-- Dumping data for table `applicants`
 --
 
-LOCK TABLES `aplicants` WRITE;
-/*!40000 ALTER TABLE `aplicants` DISABLE KEYS */;
-INSERT INTO `aplicants` VALUES (1,46234865,'Gloria','Medina','gloriamedina@gmail.com','+54 9 223 123-4567','www.linkedin.com/in/Gloria-Medina','2000-11-02','Femenino','aspirant1.png',2,NULL,NULL,NULL),(2,12345678,'Juan','Perez','juanperez@gmail.com','+54 9 223 234-5678','www.linkedin.com/in/Juan-Perez','1995-03-15','Masculino','aspirant2.png',1,NULL,NULL,NULL),(3,59765432,'María','López','marialopez@gmail.com','+54 9 223 345-6789','www.linkedin.com/in/María-López','1998-08-20','Femenino','aspirant3.png',4,NULL,NULL,NULL),(4,34567891,'Carlos','González','carlosgonzalez@gmail.com','+54 9 223 456-7890','www.linkedin.com/in/Carlos-González','1992-05-10','Masculino','aspirant4.png',5,NULL,NULL,NULL),(5,56789123,'Ana','Martínez','anamartinez@gmail.com','+54 9 223 567-8901','www.linkedin.com/in/Ana-Martínez','1997-12-25','Femenino','aspirant5.png',6,NULL,NULL,NULL),(6,78912345,'Pedro','Rodríguez','pedrorodriguez@gmail.com','+54 9 223 678-9012','www.linkedin.com/in/Pedro-Rodríguez','1990-09-30','Masculino','aspirant6.png',7,NULL,NULL,NULL),(7,91234567,'Laura','García','lauragarcia@gmail.com','+54 9 223 789-0123','www.linkedin.com/in/Laura-García','1994-04-05','Femenino','aspirant7.png',8,NULL,NULL,NULL),(8,23456789,'Miguel','Fernández','miguelfernandez@gmail.com','+54 9 223 890-1234','www.linkedin.com/in/Miguel-Fernández','1988-07-17','Masculino','aspirant8.png',9,NULL,NULL,NULL),(9,45678912,'Sofía','Díaz','sofiadiaz@gmail.com','+54 9 223 901-2345','www.linkedin.com/in/Sofía-Díaz','1996-02-28','Femenino','aspirant9.png',10,NULL,NULL,NULL),(10,67891234,'José','Sánchez','josesanchez@gmail.com','+54 9 223 012-3456','www.linkedin.com/in/José-Sánchez','1993-10-12','Masculino','aspirant10.png',5,NULL,NULL,NULL),(11,89123456,'Lucía','Hernández','luciahernandez@gmail.com','+54 9 223 123-4567','www.linkedin.com/in/Lucía-Hernández','1999-06-18','Femenino','aspirant11.png',1,NULL,NULL,NULL),(12,10987654,'Diego','Torres','diegotorres@gmail.com','+54 9 223 234-5678','www.linkedin.com/in/Diego-Torres','1991-09-08','Masculino','aspirant12.png',3,NULL,NULL,NULL),(13,98765432,'Andrés','Gómez','andresgomez@gmail.com','+54 9 223 345-6789','www.linkedin.com/in/Andrés-Gómez','1997-10-30','Masculino','aspirant13.png',2,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `aplicants` ENABLE KEYS */;
+LOCK TABLES `applicants` WRITE;
+/*!40000 ALTER TABLE `applicants` DISABLE KEYS */;
+INSERT INTO `applicants` VALUES (1,46234865,'Gloria','Medina','gloriamedina@gmail.com','+54 9 223 123-4567','www.linkedin.com/in/Gloria-Medina','2000-11-02','Femenino','aspirant1.png',2,NULL,NULL,NULL),(2,12345678,'Juan','Perez','juanperez@gmail.com','+54 9 223 234-5678','www.linkedin.com/in/Juan-Perez','1995-03-15','Masculino','aspirant2.png',1,NULL,NULL,NULL),(3,59765432,'María','López','marialopez@gmail.com','+54 9 223 345-6789','www.linkedin.com/in/María-López','1998-08-20','Femenino','aspirant3.png',4,NULL,NULL,NULL),(4,34567891,'Carlos','González','carlosgonzalez@gmail.com','+54 9 223 456-7890','www.linkedin.com/in/Carlos-González','1992-05-10','Masculino','aspirant4.png',5,NULL,NULL,NULL),(5,56789123,'Ana','Martínez','anamartinez@gmail.com','+54 9 223 567-8901','www.linkedin.com/in/Ana-Martínez','1997-12-25','Femenino','aspirant5.png',6,NULL,NULL,NULL),(6,78912345,'Pedro','Rodríguez','pedrorodriguez@gmail.com','+54 9 223 678-9012','www.linkedin.com/in/Pedro-Rodríguez','1990-09-30','Masculino','aspirant6.png',7,NULL,NULL,NULL),(7,91234567,'Laura','García','lauragarcia@gmail.com','+54 9 223 789-0123','www.linkedin.com/in/Laura-García','1994-04-05','Femenino','aspirant7.png',8,NULL,NULL,NULL),(8,23456789,'Miguel','Fernández','miguelfernandez@gmail.com','+54 9 223 890-1234','www.linkedin.com/in/Miguel-Fernández','1988-07-17','Masculino','aspirant8.png',9,NULL,NULL,NULL),(9,45678912,'Sofía','Díaz','sofiadiaz@gmail.com','+54 9 223 901-2345','www.linkedin.com/in/Sofía-Díaz','1996-02-28','Femenino','aspirant9.png',10,NULL,NULL,NULL),(10,67891234,'José','Sánchez','josesanchez@gmail.com','+54 9 223 012-3456','www.linkedin.com/in/José-Sánchez','1993-10-12','Masculino','aspirant10.png',5,NULL,NULL,NULL),(11,89123456,'Lucía','Hernández','luciahernandez@gmail.com','+54 9 223 123-4567','www.linkedin.com/in/Lucía-Hernández','1999-06-18','Femenino','aspirant11.png',1,NULL,NULL,NULL),(12,10987654,'Diego','Torres','diegotorres@gmail.com','+54 9 223 234-5678','www.linkedin.com/in/Diego-Torres','1991-09-08','Masculino','aspirant12.png',3,NULL,NULL,NULL),(13,98765432,'Andrés','Gómez','andresgomez@gmail.com','+54 9 223 345-6789','www.linkedin.com/in/Andrés-Gómez','1997-10-30','Masculino','aspirant13.png',2,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `applicants` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `professions` (
   `name` varchar(120) NOT NULL,
   `createdAt` date DEFAULT NULL,
   `updatedAt` date DEFAULT NULL,
-  `deleteAt` date DEFAULT NULL,
+  `deletedAt` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

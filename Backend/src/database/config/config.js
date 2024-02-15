@@ -1,8 +1,9 @@
-const config = require('../../../config.js') || "";
+/* const config = require('../../../config.js') || ""; */
 module.exports = {
   "development": {
     "username": "root",
-    "password": config.database.password,
+    /* "password": config.database.password, */
+    "password": null,
     "database": "recruitingrh",
     "host": "127.0.0.1",
     "dialect": "mysql"
