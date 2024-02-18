@@ -3,7 +3,9 @@ const { Applicant } = require('../database/models');
 const applicantsController = {
     all: async(req, res) => {
         try{
-            const applicants = await Applicant.findAll();
+            const applicants = await Applicant.findAll({
+                include: [{association: 'profession'}]
+            });
 
             res.status(200).json({
                 meta:{
@@ -22,7 +24,9 @@ const applicantsController = {
     },
     detail: async(req, res) => {
         try{
-            const applicant = await Applicant.findByPk(req.params.id);
+            const applicant = await Applicant.findByPk(req.params.id, {
+                include: [{association: 'profession'}]
+            });
 
             res.status(200).json({
                 meta:{
@@ -43,7 +47,7 @@ const applicantsController = {
         const { body } = req;
         try{
             await Applicant.create({
-                dni: body.dni,
+                dni: +body.dni,
                 name: body.name,
                 surname: body.surname,
                 email: body.email,

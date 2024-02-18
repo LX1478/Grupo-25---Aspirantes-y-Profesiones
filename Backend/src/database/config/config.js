@@ -1,9 +1,7 @@
-/* const config = require('../../../config.js') || ""; */
 module.exports = {
   "development": {
     "username": "root",
-    /* "password": config.database.password, */
-    "password": null,
+    "password": "root",
     "database": "recruitingrh",
     "host": "127.0.0.1",
     "dialect": "mysql"
