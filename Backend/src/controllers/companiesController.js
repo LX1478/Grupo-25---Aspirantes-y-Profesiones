@@ -1,19 +1,17 @@
-const { Applicant } = require('../database/models');
+const { Company } = require('../database/models');
 
-const applicantsController = {
+module.exports = {
     all: async(req, res) => {
         try{
-            const applicants = await Applicant.findAll({
-                include: [{association: 'profession'}]
-            });
+            const companies = await Company.findAll();
 
             res.status(200).json({
                 meta:{
                 status:res.statusCode,
                 url: req.protocol + '://' + req.get('host') + req.url,
-                length: applicants.length
+                length: companies.length
                 },
-                data: applicants
+                data: companies
             });
         }catch(error){
             console.error("Error al obtener los solicitantes:", error);
@@ -22,100 +20,96 @@ const applicantsController = {
                 });
         }
     },
+    
     detail: async(req, res) => {
         try{
-            const applicant = await Applicant.findByPk(req.params.id, {
-                include: [{association: 'profession'}]
-            });
+            const company = await Company.findByPk(req.params.id);
 
             res.status(200).json({
                 meta:{
                 status:res.statusCode,
                 url: req.protocol + '://' + req.get('host') + req.url,
                 },
-                data: applicant
+                data: company
             });
         }catch(error){
-            console.error("Error al obtener los solicitantes:", error);
-                res.status(500).json({
-                    error: "Error al procesar la solicitud"
-                });
+        console.error("Error al obtener los solicitantes:", error);
+            res.status(500).json({
+                error: "Error al procesar la solicitud"
+            });
         }
-
     },
+
     add: async(req, res) => {
         const { body } = req;
         try{
-            await Applicant.create({
-                dni: +body.dni,
+            await Company.create({
                 name: body.name,
-                surname: body.surname,
                 description: body.description,
+                industry: body.industry,
+                webSite: body.webSite,
+                logo: req.file ? req.file.filename : 'default.png',
                 email: body.email,
                 password: body.password,
-                phone: body.phone,
-                urlLinkedin: body.urlLinkedin,
-                dateOfBirth: body.dateOfBirth,
-                sex: body.sex,
-                image: req.file ? req.file.filename : 'default.png',
                 location: body.location,
-                professionId: body.professionId,
             });
+
+            return res.status(201).json({
+                meta: {
+                    status: res.statusCode,
+                    url: req.protocol + '://' + req.get('host') + req.url,
+                },
+            });
+
+        }catch(error){
+            console.error("Error al obtener los solicitantes:", error);
+            res.status(500).json({
+                error: "Error al procesar la solicitud",
+            });
+        }
+    },
+
+    edit: async(req, res) => {
+        const { body } = req;
+        try{
+            await Company.update({
+                name: body.name,
+                description: body.description,
+                industry: body.industry,
+                webSite: body.webSite,
+                email: body.email,
+                password: body.password,
+                location: body.location,
+            },{
+                where: {
+                    id: req.params.id
+                }
+            });
+
             return res.status(201).json({
                 meta: {
                     status: res.statusCode,
                     url: req.protocol + '://' + req.get('host') + req.url
                 },
             });
+
         }catch(error){
-            console.error("Error al procesar: ", error);
+            console.error("Error al obtener los solicitantes:", error);
             res.status(500).json({
                 error: "Error al procesar la solicitud"
             });
         }
     },
-    edit: async (req, res) => {
-        const { body } = req;
+
+    remove: async(req, res) => {
         try{
-            await Applicant.update({
-                dni: body.dni,
-                name: body.name,
-                surname: body.surname,
-                description: body.description,
-                email: body.email,
-                password: body.password,
-                phone: body.phone,
-                urlLinkedin: body.urlLinkedin,
-                dateOfBirth: body.dateOfBirth,
-                sex: body.sex,
-                location: body.location,
-                proffesionId: body.proffesionId,
-            }, {
+            await Company.destroy({
                 where: {
                     id: req.params.id,
                 }
             });
-            res.status(200).json({
-                meta: {
-                    status: res.statusCode,
-                    url: req.protocol + '://' + req.get('host') + req.url
-                }
-            });
-        }catch(error){
-            console.error("Error al procesar: ", error);
-            res.status(500).json({
-                error: "Error al procesar la solicitud"
-            });
-        }
-    },
-    remove: async (req, res) => {
-        try{
-            await Applicant.destroy({
-                where: {
-                    id: req.params.id,
-                }
-            });
-            res.status(200).json({
+
+            return res.status(200).json({
                 meta: {
                     status: res.statusCode,
                     url: req.protocol + '://' + req.get('host') + req.url
@@ -128,6 +122,5 @@ const applicantsController = {
             });
         }
     }
-}
 
-module.exports = applicantsController;
+}

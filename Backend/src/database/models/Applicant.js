@@ -6,6 +6,15 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
+        roleId:{
+            type: DataTypes.INTEGER.UNSIGNED,
+            allowNull: false,
+            defaultValue: 2,
+            references: {
+                model: 'Role',
+                key: 'id'
+              }
+        },
         dni:{
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false,
@@ -19,10 +28,18 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(60),
             allowNull: false,
         },
+        description:{
+            type: DataTypes.STRING(1024),
+            allowNull: false,
+        },
         email:{
             type: DataTypes.STRING(255),
             allowNull: false,
             unique: true
+        },
+        password:{
+            type: DataTypes.STRING(255),
+            allowNull: false,
         },
         phone:{
             type: DataTypes.STRING(30),
@@ -44,7 +61,11 @@ module.exports = (sequelize, DataTypes) => {
         image:{
             type: DataTypes.STRING(255),
             allowNull: true,
-            default: 'default.png'
+            defaultValue: 'default.png'
+        },
+        location:{
+            type: DataTypes.STRING(255),
+            allowNull: false,
         },
         professionId:{
             type: DataTypes.BIGINT.UNSIGNED,
@@ -58,14 +79,25 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'applicants',
       timestamps: true,      
       paranoid: true, // habilita deletedAt
-   })
+   });
 
-   Applicant.associate = (models)=> { 
-    Applicant.belongsTo(models.Profession, {
-        as: 'profession',
-        foreignKey: 'professionId'
-       })
-    }
+   Applicant.associate = (models) => { 
+        Applicant.belongsTo(models.Profession, {
+            as: 'profession',
+            foreignKey: 'professionId'
+        }),
+        Applicant.belongsTo(models.Role, {
+            as: "applicantRole",
+            foreignKey: "roleId"
+        }),
+        Applicant.belongsToMany(models.Company, {
+            as: "contracted",
+            through: "recruiting",
+            foreignKey: "applicantId",
+            otherKey: "companyId",
+            timestamps: true,
+        })
+    };
 
    return Applicant;
 }

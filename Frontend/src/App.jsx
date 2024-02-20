@@ -16,7 +16,7 @@ function App() {
 			{/*Fin Sección de acceso*/}
 
 			{/*Sección menu*/}
-			{/* <Navbar /> */}
+			<Navbar />
 			{/*Fin Sección menu*/}
 
 			{/*Sección contenido*/}

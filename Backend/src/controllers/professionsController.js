@@ -42,6 +42,7 @@ const professionsController = {
         try{
             await Profession.create({
                 name: body.name,
+                description: body.description,
             });
 
             return res.status(201).json({
@@ -62,6 +63,7 @@ const professionsController = {
         try{
             await Profession.update({
                 name: body.name,
+                description: body.description,
             },{
                 where: {
                     id: req.params.id
