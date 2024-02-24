@@ -1,5 +1,5 @@
 import { getProfessions } from "../../services/professionsService";
-import Button from "./Button";
+import Item from "./Item";
 import { useState, useEffect } from "react";
 
 /* const professions = [
@@ -13,38 +13,37 @@ import { useState, useEffect } from "react";
     "Linguista"
 ]; */
 
-function Section(){
+function Section() {
+  const [professions, setProfessions] = useState([]);
 
-    const [professions, setProfessions] = useState([]);
+  useEffect(() => {
+    async function getProfessionsData() {
+      const data = await getProfessions();
+      console.log(data);
+      setProfessions(data.data);
+    }
 
-    useEffect(() => {
-        async function getProfessionsData(){
-            const data = await getProfessions();
-            console.log(data);
-            setProfessions(data.data);
-        }
+    getProfessionsData();
+  }, []);
 
-        getProfessionsData();
-    },[]);
-
-    return(
-        <section className="content profesiones">
-        <h2 className="mt-3">Profesiones</h2>
-        <div className="list-group shadow-sm p-3 mb-5 rounded">
-            <h4 className="list-group-item list-group-item-action active text-center"
-                aria-current="true">
-                Listado de Profesiones
-            </h4>
-
-            {Array.isArray(professions) && professions.map((profession, i) => 
-            <Button 
-                key={i} 
-                profession={profession.name}
-            />)}
-           
+  return (
+    <section className="content profesiones">
+      <h2 className="mt-3">Profesiones</h2>
+      <div className="list-group shadow-sm p-3 mb-5 rounded">
+        <div className="accordion accordion-flush" id="accordionFlushExample">
+          {Array.isArray(professions) &&
+            professions.map((profession, i) => (
+              <Item
+                key={i}
+                name={profession.name}
+                description={profession.description}
+                id={profession.id}
+              />
+            ))}
         </div>
-        </section>
-    )
+      </div>
+    </section>
+  );
 }
 
 export default Section;

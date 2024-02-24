@@ -3,7 +3,14 @@ const { Company } = require('../database/models');
 module.exports = {
     all: async(req, res) => {
         try{
-            const companies = await Company.findAll();
+            let companies = await Company.findAll();
+
+            companies = companies.map(company => {
+                return {
+                        ...company.dataValues,
+                        logo: req.protocol + '://' + req.get('host') + '/images/company/' + company.logo,
+                }
+            })
 
             res.status(200).json({
                 meta:{
@@ -23,7 +30,12 @@ module.exports = {
     
     detail: async(req, res) => {
         try{
-            const company = await Company.findByPk(req.params.id);
+            let company = await Company.findByPk(req.params.id);
+
+            company = {
+                ...company.dataValues,
+                logo: req.protocol + '://' + req.get('host') + '/images/company/' + company.logo
+            }
 
             res.status(200).json({
                 meta:{

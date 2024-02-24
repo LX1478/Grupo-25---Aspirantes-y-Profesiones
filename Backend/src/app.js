@@ -21,6 +21,8 @@ app.use(express.json());
 app.use("/applicants", applicantsRoutes);
 app.use("/professions", professionsRoutes);
 app.use("/companies", companiesRoutes);
+app.use("/images/applicant", express.static(path.join( __dirname, './upload/applicants')));
+app.use("/images/company", express.static(path.join( __dirname, './upload/companies')));
 
 app.listen(PORT, () =>
   console.log(`[running on] 🚀 http://localhost:${PORT}/`)

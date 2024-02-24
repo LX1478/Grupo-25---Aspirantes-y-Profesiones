@@ -1,6 +1,3 @@
-import SectionApplicants from '../Applicants/Section'
-import SectionProfessions from '../Professions/Section'
-
 function Content() {
     return (
         <main className="content-wrap">
@@ -16,15 +13,6 @@ function Content() {
                 {/*Fin Encabezado*/}
             </header>
             {/*Fin Preventa*/}
-
-            {/*Sección aspirantes*/}
-            <SectionApplicants />
-            {/*Fin sección aspirantes*/}
-
-
-            {/*Sección de profesiones*/}
-            <SectionProfessions />
-            {/*Fin sección profesiones*/}
 
         </main>
     )

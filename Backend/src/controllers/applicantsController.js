@@ -3,9 +3,17 @@ const { Applicant } = require('../database/models');
 const applicantsController = {
     all: async(req, res) => {
         try{
-            const applicants = await Applicant.findAll({
+            let applicants = await Applicant.findAll({
                 include: [{association: 'profession'}]
             });
+
+            applicants = applicants.map(applicant => {
+                return {
+                        ...applicant.dataValues,
+                        image: req.protocol + '://' + req.get('host') + '/images/applicant/' + applicant.image,
+                        link: req.protocol + '://' + req.get('host') + '/applicants/' + applicant.id
+                }
+            })
 
             res.status(200).json({
                 meta:{
@@ -24,9 +32,14 @@ const applicantsController = {
     },
     detail: async(req, res) => {
         try{
-            const applicant = await Applicant.findByPk(req.params.id, {
+            let applicant = await Applicant.findByPk(req.params.id, {
                 include: [{association: 'profession'}]
             });
+
+            applicant = {
+                ...applicant.dataValues,
+                image: req.protocol + '://' + req.get('host') + '/images/applicant/' + applicant.image
+            }
 
             res.status(200).json({
                 meta:{

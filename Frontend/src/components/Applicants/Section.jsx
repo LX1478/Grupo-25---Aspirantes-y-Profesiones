@@ -9,6 +9,7 @@ function Section(){
       async function getApplicantsData(){
         const data = await getApplicants();
         setApplicants(data.data);
+        
       }
 
       getApplicantsData();
@@ -22,11 +23,11 @@ function Section(){
             {Array.isArray(applicants) && applicants.map((applicant, i) => 
             (<Person 
                 key={i} 
-                img={"../../../../applicant1.jpg"} 
-                /* "../../../../Backend/src/upload/applicants/applicant1.jpg" */
+                img={applicant.image} 
                 alt={applicant.name} 
                 name={applicant.name + ' ' + applicant.surname} 
                 profession={applicant.profession.name}
+                id={applicant.id}
             />))}
 
         </article>
