@@ -1,35 +1,41 @@
 const { Company } = require('../database/models');
+const { validationResult } = require("express-validator");
+
+/* Funcion para devolver los datos meta */
+function meta(req, res, data = 1) {
+    return ({
+        status: res.statusCode,
+        url: req.protocol + '://' + req.get('host') + req.url,
+        length: data.length,
+    });
+};
 
 module.exports = {
-    all: async(req, res) => {
-        try{
+    all: async (req, res) => {
+        try {
             let companies = await Company.findAll();
 
             companies = companies.map(company => {
                 return {
-                        ...company.dataValues,
-                        logo: req.protocol + '://' + req.get('host') + '/images/company/' + company.logo,
+                    ...company.dataValues,
+                    logo: req.protocol + '://' + req.get('host') + '/images/company/' + company.logo,
                 }
-            })
+            });
 
             res.status(200).json({
-                meta:{
-                status:res.statusCode,
-                url: req.protocol + '://' + req.get('host') + req.url,
-                length: companies.length
-                },
+                meta: meta(req, res, companies),
                 data: companies
             });
-        }catch(error){
+        } catch (error) {
             console.error("Error al obtener los solicitantes:", error);
-                res.status(500).json({
-                    error: "Error al procesar la solicitud"
-                });
+            res.status(500).json({
+                error: "Error al procesar la solicitud"
+            });
         }
     },
-    
-    detail: async(req, res) => {
-        try{
+
+    detail: async (req, res) => {
+        try {
             let company = await Company.findByPk(req.params.id);
 
             company = {
@@ -38,23 +44,29 @@ module.exports = {
             }
 
             res.status(200).json({
-                meta:{
-                status:res.statusCode,
-                url: req.protocol + '://' + req.get('host') + req.url,
-                },
+                meta: meta(req, res, company),
                 data: company
             });
-        }catch(error){
-        console.error("Error al obtener los solicitantes:", error);
+        } catch (error) {
+            console.error("Error al obtener los solicitantes:", error);
             res.status(500).json({
                 error: "Error al procesar la solicitud"
             });
         }
     },
 
-    add: async(req, res) => {
+    add: async (req, res) => {
         const { body } = req;
-        try{
+        const resultValidation = validationResult(req);
+
+        if (resultValidation.errors.length > 0) {
+            return res.status(400).json({
+                meta: meta(req, res, resultValidation.array()),
+                errores: resultValidation.mapped()
+            });
+        };
+
+        try {
             await Company.create({
                 name: body.name,
                 description: body.description,
@@ -67,13 +79,10 @@ module.exports = {
             });
 
             return res.status(201).json({
-                meta: {
-                    status: res.statusCode,
-                    url: req.protocol + '://' + req.get('host') + req.url,
-                },
+                meta: meta(req, res),
             });
 
-        }catch(error){
+        } catch (error) {
             console.error("Error al obtener los solicitantes:", error);
             res.status(500).json({
                 error: "Error al procesar la solicitud",
@@ -81,9 +90,9 @@ module.exports = {
         }
     },
 
-    edit: async(req, res) => {
+    edit: async (req, res) => {
         const { body } = req;
-        try{
+        try {
             await Company.update({
                 name: body.name,
                 description: body.description,
@@ -92,20 +101,17 @@ module.exports = {
                 email: body.email,
                 password: body.password,
                 location: body.location,
-            },{
+            }, {
                 where: {
                     id: req.params.id
                 }
             });
 
             return res.status(201).json({
-                meta: {
-                    status: res.statusCode,
-                    url: req.protocol + '://' + req.get('host') + req.url
-                },
+                meta: meta(req, res)
             });
 
-        }catch(error){
+        } catch (error) {
             console.error("Error al obtener los solicitantes:", error);
             res.status(500).json({
                 error: "Error al procesar la solicitud"
@@ -113,8 +119,8 @@ module.exports = {
         }
     },
 
-    remove: async(req, res) => {
-        try{
+    remove: async (req, res) => {
+        try {
             await Company.destroy({
                 where: {
                     id: req.params.id,
@@ -122,12 +128,9 @@ module.exports = {
             });
 
             return res.status(200).json({
-                meta: {
-                    status: res.statusCode,
-                    url: req.protocol + '://' + req.get('host') + req.url
-                }
+                meta: meta(req, res)
             });
-        }catch(error){
+        } catch (error) {
             console.error("Error al procesar: ", error);
             res.status(500).json({
                 error: "Error al procesar la solicitud"
