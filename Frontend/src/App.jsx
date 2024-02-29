@@ -9,6 +9,7 @@ import Main from "./views/Home";
 import Applicants from "./views/Applicants";
 import Professions from "./views/Professions";
 import Companies from "./views/Companies";
+import RegisterCompany from "./views/RegisterCompany";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/aspirantes" element={<Applicants/>}/>
         <Route path="/profesiones" element={<Professions/>}/>
         <Route path="/empresas" element={<Companies/>}/>
+        <Route path="/registro/empresa" element={<RegisterCompany/>}/>
       </Routes>
     </div>
   );
