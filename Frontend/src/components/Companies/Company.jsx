@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 function Company(props){
     return(
-        <Link to={props.link} className="card mb-3"  style={{ maxWidth: '540px', textDecoration: 'none' }}>
+        <Link to={"/empresas/"+ props.id} className="card mb-3 "  style={{ maxWidth: '600px', textDecoration: 'none' }}>
             <div className="row g-0">
                 <div className="col-md-4">
                     <img src={props.logo} className="img-fluid rounded-start" alt={props.name} />

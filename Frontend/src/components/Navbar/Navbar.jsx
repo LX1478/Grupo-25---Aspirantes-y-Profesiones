@@ -1,14 +1,19 @@
 import User from "./User";
 import Menu from "./Menu";
 
-function Navbar(){
-    return(
-        <header className="menu-wrap">
-        <User img="/images/logo-dh.png" name="Digital House" alt="Logo Digital House"/>
-        
-        <Menu />
-    </header>
-    )
+function Navbar() {
+  return (
+    <>
+      <nav className="menu-wrap hamburger">
+        <User
+          img="/images/logo-dh.png"
+          name="Digital House"
+          alt="Logo Digital House"
+        />
+          <Menu />
+      </nav>
+    </>
+  );
 }
 
 export default Navbar;

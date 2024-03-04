@@ -3,7 +3,7 @@ import Actions from './Actions/Actions';
 
 function Person(props){
     return(
-        <Link to={"/applicants/"+props.id} className="person-box shadow p-3 mb-5 bg-body-tertiary rounded">
+        <Link to={"/aspirantes/"+props.id} className="person-box shadow p-3 mb-5 bg-body-tertiary rounded">
         <div className="box-avatar">
             <img src={props.img} alt={props.alt}/>
         </div>

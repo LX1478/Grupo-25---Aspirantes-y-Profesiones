@@ -22,7 +22,8 @@ function Section(){
             
             {Array.isArray(companies) && companies.map((company, i) => 
             (<Company 
-                key={i} 
+                key={i}
+                id={company.id} 
                 logo={company.logo}  
                 name={company.name} 
                 location={company.location}
