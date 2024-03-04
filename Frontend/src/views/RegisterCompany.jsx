@@ -2,7 +2,7 @@ import CompanySection from "../components/RegisterCompany/Section"
 
 function Company(){
     return(
-        <div>
+        <div className="">
             <CompanySection/>
         </div>
     );

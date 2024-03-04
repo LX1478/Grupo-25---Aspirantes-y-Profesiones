@@ -1,0 +1,9 @@
+.registerLink{
+    color: cornflowerblue  ;
+    border-color: cornflowerblue;
+}
+.registerLink:hover{    
+    background-color: cornflowerblue;
+    transition: all 1s;
+    
+}

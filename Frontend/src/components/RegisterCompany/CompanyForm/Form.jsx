@@ -1,8 +1,11 @@
 import { useState, useEffectt } from "react";
 import { useForm } from "react-hook-form";
 import { postCompany } from "../../../services/companiesService";
+import "../../../styles/CompanyForm.css"
+import validations from "../../../utils/validations";
 
 function Form() {
+    const [focusedInput, setFocusedInput] = useState(false);
     const [errores, setErrores] = useState({});
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -19,7 +22,15 @@ function Form() {
             logo: e.logo
         });
     };
-    
+
+    const handleFocus = (id) => {
+        setFocusedInput(id);
+    }
+
+    const handleBlur = () => {
+        setFocusedInput(null);
+    }
+
     const onSubmit = handleSubmit(async (data) => {
         let formData = new FormData();
 
@@ -36,65 +47,10 @@ function Form() {
             console.log("La respuesta del servidor fue", response);
             updateErrors(response.errores);
         }
-        else console.log("No hubo respuesta del servidor toto ok");
+        else {
+            console.log("No hubo respuesta del servidor toto ok");   
+        }
     });
-
-    /* Validaciones */
-    const commonValid = (min, max) => {
-        return {
-            required: `Este campo es obligatorio`,
-            minLength: {
-                value: min,
-                message: "Debe tener un minimo de 2 carácteres"
-            },
-            maxLength: {
-                value: max,
-                message: "Debe tener un máximo de 2 carácteres"
-            }
-        };
-    };
-    const emailValid = () => {
-        return {
-            required: "El email es obligatorio",
-            pattern: {
-                value: "/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/",
-                message: "El email no es válido"
-            }
-        };
-    };
-
-    const logoValid = () => {
-        return {
-            validate: (value) => {
-                if(value[0]){
-                    const type = value[0].type;
-                    if (type !== "image/jpg" && type !== "image/jpeg" && type !== "image/png" && type !== "image/gif") {
-                        return "Los formatos permitidos son: jpg, jpeg, png, gif";
-                    }
-                }
-                return true;
-            }
-        };
-    };
-
-    const passwordValid = (validatep = true) => {
-        return {
-            required: "La contraseña es obligatoria",
-            minLength: {
-                value: 8,
-                message: "Debe tener un minimo de 8 carácteres"
-            },
-            maxLength: {
-                value: 120,
-                message: "Debe tener un máximo de 120 carácteres"
-            },
-            pattern: {
-                value: /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>?¡¿]).*(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-                message: "Debe tener de minimo una letra mayúscula, una letra minúscula, un número y un carácter especial"
-            },
-            validate: validatep
-        };
-    };
 
     const matchingPasswords = () => {
         if (watch("password") === watch("repassword")) {
@@ -104,56 +60,133 @@ function Form() {
     };
 
     return (
-        <div>
-            <form onSubmit={onSubmit}
-                style={{ width: "200px", display: "flex", flexWrap: "wrap", flexDirection: "column", margin: "20px 0px", height:"500px"}}>
+        <div className="div-general">
+            <form onSubmit={onSubmit} className="text-start d-flex flex-wrap flex-column form-company">
 
-                <label htmlFor="">Nombre</label>
-                <input type="text" {...register("name", commonValid(2, 120))} />
-                {errors.name && <p>{errors.name.message}</p> }
-                {errores.name && <p>{errores.name.msg}</p> }
+                <div className="input-container">
+                    <label htmlFor="name"
+                        className={`${focusedInput === 'name' ? 'focused' : ''} ${(errors.name || errores.name) ? "lb-error" : ""}`}>
+                        Nombre
+                    </label>
+                    <input type="text" id="name"
+                        className={`input-company ${(errors.name || errores.name) ? "input-error" : ""}`}
+                        {...register("name", validations.commonValid(2, 120))}
+                        onFocus={() => handleFocus('name')} onBlur={handleBlur} />
 
-                <label htmlFor="">Descripcion</label>
-                <input type="text" {...register("description", commonValid(2, 1024))} />
-                {errors.description && <p>{errors.description.message}</p> }
-                {errores.description && <p>{errores.description.msg}</p> }
+                    {errors.name && <p className="text-error">{errors.name.message}</p>}
+                    {errores.name && <p className="text-error">{errores.name.msg}</p>}
+                </div>
 
-                <label htmlFor="">Industria</label>
-                <input type="text" {...register("industry", commonValid(2, 60))} />
-                {errors.industry && <p>{errors.industry.message}</p> }
-                {errores.industry && <p>{errores.industry.msg}</p> }
+                <div className="input-container">
+                    <label htmlFor="industry"
+                        className={`${focusedInput === 'industry' ? 'focused' : ''} ${(errors.industry || errores.industry) ? "lb-error" : ""}`} >
+                        Industria
+                    </label>
+                    <input type="text" id="industry"
+                        className={`input-company ${(errors.industry || errores.industry) ? "input-error" : ""}`}
+                        {...register("industry", validations.commonValid(2, 60))}
+                        onFocus={() => handleFocus('industry')} onBlur={handleBlur} />
 
-                <label htmlFor="">Sitio Web</label>
-                <input type="text" {...register("webSite", commonValid(2, 120))} />
-                {errors.webSite && <p>{errors.webSite.message}</p> }
-                {errores.webSite && <p>{errores.webSite.msg}</p> }
+                    {errors.industry && <p className="text-error" >{errors.industry.message}</p>}
+                    {errores.industry && <p className="text-error" >{errores.industry.msg}</p>}
+                </div>
 
-                <label htmlFor="">Dirección</label>
-                <input type="text" {...register("location", commonValid(2, 255))} />
-                {errors.location && <p>{errors.location.message}</p> }
-                {errores.location && <p>{errores.location.msg}</p> }
+                <div className="input-container">
+                    <label htmlFor="webSite" id="webSite"
+                        className={`${focusedInput === 'webSite' ? 'focused' : ''} ${(errors.webSite || errores.webSite) ? "lb-error" : ""}`} >
+                        Sitio Web
+                    </label>
+                    <input type="text" className={`input-company ${(errors.webSite || errores.webSite) ? "input-error" : ""}`}
+                        {...register("webSite", validations.commonValid(2, 120))}
+                        onFocus={() => handleFocus('webSite')} onBlur={handleBlur} f />
 
-                <label htmlFor="">Logo</label>
-                <input type="file" {...register("logo", logoValid())} />
-                {errors.logo && <p>{errors.logo.message}</p> }
-                {errores.logo && <p>{errores.logo.msg}</p> }
+                    {errors.webSite && <p className="text-error" >{errors.webSite.message}</p>}
+                    {errores.webSite && <p className="text-error">{errores.webSite.msg}</p>}
+                </div>
 
-                <label htmlFor="">email</label>
-                <input type="text" {...register("email", emailValid())} />
-                {errors.email && <p>{errors.email.message}</p> }
-                {errores.email && <p>{errores.email.msg}</p> }
+                <div className="input-container">
+                    <label htmlFor="location"
+                        className={`${focusedInput === 'location' ? 'focused' : ''} ${(errors.location || errores.location) ? "lb-error" : ""}`} >
+                        Dirección
+                    </label>
+                    <input type="text" id="location"
+                        className={`input-company ${(errors.location || errores.location) ? "input-error" : ""}`}
+                        {...register("location", validations.commonValid(2, 255))}
+                        onFocus={() => handleFocus('location')} onBlur={handleBlur} />
 
-                <label htmlFor="" >Contraseña</label>
-                <input type="text" {...register("password", passwordValid())} />
-                {errors.password && <p>{errors.password.message}</p>}
-                {errores.password && <p>{errores.password.msg}</p> }
+                    {errors.location && <p className="text-error">{errors.location.message}</p>}
+                    {errores.location && <p className="text-error">{errores.location.msg}</p>}
+                </div>
 
-                <label htmlFor="">Repetir Contraseña</label>
-                <input type="text" {...register("repassword", passwordValid(matchingPasswords))} />
-                {errors.repassword && <p>{errors.repassword.message}</p>}
-                {errores.repassword && <p>{errores.repassword.msg}</p> }
+                <div className="input-container">
+                    <label htmlFor="description"
+                        className={`${focusedInput === 'description' ? 'focused' : ''} ${(errors.description || errores.description) ? "lb-error" : ""}`} >
+                        Descripción
+                    </label>
+                    <input type="text" id="description"
+                        className={`input-company ${(errors.description || errores.description) ? "input-error" : ""}`}
+                        {...register("description", validations.commonValid(2, 1024))}
+                        onFocus={() => handleFocus('description')} onBlur={handleBlur} />
 
-                <input type="submit" value="enviar" />
+                    {errors.description && <p className="text-error">{errors.description.message}</p>}
+                    {errores.description && <p className="text-error" >{errores.description.msg}</p>}
+                </div>
+
+                <div className="input-container">
+                    <label htmlFor="logo" className={`${(errors.logo || errores.logo) ? "lb-error" : ""}`} >Logo</label>
+                    <label htmlFor="logo" className="lb-file" >
+                    {watch("logo") ? watch("logo")[0]?.name : "Seleccionar archivo"}
+                    </label>
+                    <input type="file" id="logo"
+                        className="input-logo" {...register("logo", validations.logoValid())} />
+
+                    {errors.logo && <p className="text-error">{errors.logo.message}</p>}
+                    {errores.logo && <p className="text-error">{errores.logo.msg}</p>}
+                </div>
+
+                <div className="input-container">
+                    <label htmlFor="email"
+                        className={`${focusedInput === 'email' ? 'focused' : ''} ${(errors.email || errores.email) ? "lb-error" : ""}`} >
+                        Email
+                    </label>
+                    <input type="text" id="email"
+                        className={`input-company ${(errors.email || errores.email) ? "input-error" : ""}`}
+                        {...register("email", validations.emailValid())}
+                        onFocus={() => handleFocus('email')} onBlur={handleBlur} />
+
+                    {errors.email && <p className="text-error">{errors.email.message}</p>}
+                    {errores.email && <p className="text-error">{errores.email.msg}</p>}
+                </div>
+
+                <div className="input-container">
+                    <label htmlFor="password"
+                        className={`${focusedInput === 'password' ? 'focused' : ''} ${(errors.password || errores.password) ? "lb-error" : ""}`}  >
+                        Contraseña
+                    </label>
+                    <input type="text" id="password"
+                        className={`input-company ${(errors.password || errores.password) ? "input-error" : ""}`}
+                        {...register("password", validations.passwordValid())}
+                        onFocus={() => handleFocus('password')} onBlur={handleBlur} />
+
+                    {errors.password && <p className="text-error">{errors.password.message}</p>}
+                    {errores.password && <p className="text-error   ">{errores.password.msg}</p>}
+                </div>
+
+                <div className="input-container">
+                    <label htmlFor="repassword"
+                        className={`${focusedInput === 'repassword' ? 'focused' : ''} ${(errors.repassword || errores.repassword) ? "lb-error" : ""}`} >
+                        Repetir Contraseña
+                    </label>
+                    <input type="text" id="repassword"
+                        className={`input-company ${(errors.repassword || errores.repassword) ? "input-error" : ""}`}
+                        {...register("repassword", validations.passwordValid(matchingPasswords()))}
+                        onFocus={() => handleFocus('repassword')} onBlur={handleBlur} />
+
+                    {errors.repassword && <p className="text-error">{errors.repassword.message}</p>}
+                    {errores.repassword && <p className="text-error">{errores.repassword.msg}</p>}
+                </div>
+
+                <input type="submit" value="Enviar" className="btn-submit" />
             </form>
         </div>
     );

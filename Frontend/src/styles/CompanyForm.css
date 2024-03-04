@@ -1,0 +1,92 @@
+.div-general {
+    overflow-y: scroll;
+    height: 75vh;
+}
+
+.form-company {
+    margin: 0px 10vw;
+    margin-bottom: 20px;
+    padding: 40px;
+    border: 2px solid #f4f4f4;
+    border-radius: 15px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.input-container {
+    padding-bottom: 30px;
+    position: relative;
+}
+
+.input-company {
+    outline: none;
+    width: 100%;
+    border: none;
+    border-bottom: 2px #c7e1ff solid;
+}
+
+.input-company:focus {
+    border-color: #4b84fe;
+}
+
+.lb-file {
+    margin-left: 5%;
+    display: inline-block;
+    padding: 5px 10px;
+    color: #777;
+    border: 1px solid #777;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.lb-file:hover {
+    color: #4b84fe;
+    border-color: #4b84fe   ;
+}
+
+.input-logo {
+    display: none;
+}
+
+label {
+    color: #777;
+    transition: color 0.3s ease;
+}
+
+.focused {
+    color: #4b84fe;
+}
+
+.lb-error {
+    color: salmon;
+}
+
+.input-error {
+    border-color: salmon;
+}
+
+.input-error:focus {
+    border-color: salmon;
+}
+
+.text-error {
+    position: absolute;
+    right: 2%;
+    font-size: 13px;
+    color: salmon;
+    text-align: end;
+}
+
+.btn-submit {
+    background-color: #f4f4f4;
+    color: #777;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #dcdcdc;
+}
