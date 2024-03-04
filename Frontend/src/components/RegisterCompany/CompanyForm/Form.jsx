@@ -45,11 +45,11 @@ function Form() {
             required: `Este campo es obligatorio`,
             minLength: {
                 value: min,
-                message: "Debe tener un minimo de 2 carácteres"
+                message: 'Debe tener un minimo de ' + min + 'carácteres'
             },
             maxLength: {
                 value: max,
-                message: "Debe tener un máximo de 2 carácteres"
+                message: "Debe tener un máximo de " + max + " carácteres"
             }
         };
     };
