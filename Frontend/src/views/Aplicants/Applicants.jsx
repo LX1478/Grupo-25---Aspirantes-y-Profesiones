@@ -1,9 +1,9 @@
-import SectionApplicants from "../components/Applicants/Section";
+import SectionApplicants from "../../components/Applicants/Section";
 
 function Applicants() {
   return (
     <main className="content-wrap">
-    <SectionApplicants/>
+      <SectionApplicants />
     </main>
   );
 }

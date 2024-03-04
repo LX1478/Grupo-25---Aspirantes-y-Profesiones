@@ -15,6 +15,20 @@ export async function getCompanies() {
   }
 }
 
+export async function getCompany(id) {
+  try {
+    const response = await fetch(API_BASE_URL + `/companies/${id}`);
+    const data = await response.json();
+
+    if (response.status !== 200) throw new Error('Error al conectarse con el endpoint');
+    console.log(data);
+    return data;
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function postCompany(props) {
   try {
     const response = await fetch(API_BASE_URL + "/companies/create", {

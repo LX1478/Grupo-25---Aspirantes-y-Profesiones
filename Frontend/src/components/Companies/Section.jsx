@@ -14,8 +14,25 @@ function Section() {
 
     }
 
+<<<<<<< HEAD
     getCompaniesData();
   }, []);
+=======
+    return(
+        <section className="content companies">
+        <h2>Empresas</h2>
+        <div className="list-group shadow-sm p-3 mb-5 rounded text-center ">
+            
+            {Array.isArray(companies) && companies.map((company, i) => 
+            (<Company 
+                key={i}
+                id={company.id} 
+                logo={company.logo}  
+                name={company.name} 
+                location={company.location}
+                link={company.webSite}
+            />))}
+>>>>>>> 2aa8c915b4ad08b8a4cd3ffb1fcfb9880f788572
 
   return (
     <div className="content companies">

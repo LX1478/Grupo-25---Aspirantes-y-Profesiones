@@ -1,10 +1,11 @@
+import NavbarMobile from "../Navbar/NavbarMobile";
 import Button from "./Button";
 import Search from "./Search";
 
 function HeaderSearch(){
     return(
         <section className="search-wrap">
-
+			<NavbarMobile/>
 			<Search />
 
 			<div className="user-actions">
