@@ -7,14 +7,6 @@ const applicantsController = {
                 include: [{association: 'profession'}]
             });
 
-            applicants = applicants.map(applicant => {
-                return {
-                        ...applicant.dataValues,
-                        image: req.protocol + '://' + req.get('host') + '/images/applicant/' + applicant.image,
-                        link: req.protocol + '://' + req.get('host') + '/applicants/' + applicant.id
-                }
-            })
-
             res.status(200).json({
                 meta:{
                 status:res.statusCode,
@@ -35,11 +27,6 @@ const applicantsController = {
             let applicant = await Applicant.findByPk(req.params.id, {
                 include: [{association: 'profession'}]
             });
-
-            applicant = {
-                ...applicant.dataValues,
-                image: req.protocol + '://' + req.get('host') + '/images/applicant/' + applicant.image
-            }
 
             res.status(200).json({
                 meta:{

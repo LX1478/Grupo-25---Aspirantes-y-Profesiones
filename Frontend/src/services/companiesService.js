@@ -47,7 +47,7 @@ export async function postCompany(props) {
   }
 }
 
-export async function putCompany(props) {
+/* export async function putCompany(props) {
   try {
     const response = await fetch(API_BASE_URL + `/companies/edit/${props.id}`, {
       method: "PUT",
@@ -62,4 +62,4 @@ export async function putCompany(props) {
   } catch (error) {
     console.log("Error: ", error);
   }
-}
+} */

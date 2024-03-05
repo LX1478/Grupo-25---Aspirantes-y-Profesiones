@@ -1,11 +1,3 @@
-/* <div className="card text-bg-dark">
-            <img src={props.logo} className="card-img" alt={props.name} />
-            <div className="card-img-overlay">
-                <h5 className="card-title">{props.name}</h5>
-                <p className="card-text">{props.description}</p>
-                <p className="card-text"><small>{props.location}</small></p>
-            </div>
-        </div> */
 import { Link } from "react-router-dom";
 
 function Company(props){

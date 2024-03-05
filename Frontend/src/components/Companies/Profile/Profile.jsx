@@ -24,7 +24,7 @@ function Profile({ id }) {
       >
         <div className="col-md-5">
           <img
-            src={company.logo}
+            src={"/images/companies/" + company.logo}
             className="mx-auto d-block"
             alt={company.name}
             style={{ width: "250px", borderRadius: "10%", marginTop: "1rem" }}

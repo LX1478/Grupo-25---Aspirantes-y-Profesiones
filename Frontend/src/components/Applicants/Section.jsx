@@ -23,7 +23,7 @@ function Section(){
             {Array.isArray(applicants) && applicants.map((applicant, i) => 
             (<Person 
                 key={i} 
-                img={applicant.image} 
+                img={"/images/applicants/" + applicant.image} 
                 alt={applicant.name} 
                 name={applicant.name + ' ' + applicant.surname} 
                 profession={applicant.profession.name}

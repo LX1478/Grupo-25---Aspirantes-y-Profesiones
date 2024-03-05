@@ -2,7 +2,7 @@ import { getCompanies } from "../../services/companiesService";
 import Company from "./Company";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../../styles/CompanySection.css"
+import "../../styles/Companies.css"
 
 function Section() {
   const [companies, setCompanies] = useState([]);
@@ -17,20 +17,22 @@ function Section() {
 
   return (
     <div className="content companies">
-      <section className="container-fluid">
+
+      <h2>Empresas</h2>
+
+      <section className="container-fluid section-btn">
         <Link to={"/registro/empresa"}>
           <button className="container-fluid btn btn-outline-primary registerLink">Registra tu empresa</button>
         </Link>
       </section>
 
-      <h2>Empresas</h2>
       <section className="list-group shadow-sm p-3 mb-5 rounded text-center ">
 
         {Array.isArray(companies) && companies.map((company, i) =>
         (<Company
           key={i}
           id={company.id}
-          logo={company.logo}
+          logo={"/images/companies/" + company.logo} 
           name={company.name}
           location={company.location}
           link={company.webSite}

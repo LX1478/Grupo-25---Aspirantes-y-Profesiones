@@ -1,10 +1,9 @@
-.div-general {
-    overflow-y: scroll;
-    height: 75vh;
+.section-form{
+    width: 90vw;
 }
 
 .form-company {
-    margin: 0px 10vw;
+    margin: 0px 5vw;
     margin-bottom: 20px;
     padding: 40px;
     border: 2px solid #f4f4f4;

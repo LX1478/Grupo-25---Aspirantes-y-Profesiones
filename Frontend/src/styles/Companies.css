@@ -1,9 +1,13 @@
+.section-btn{
+    margin: 30px 0px;
+}
+
 .registerLink{
     color: cornflowerblue  ;
     border-color: cornflowerblue;
 }
 .registerLink:hover{    
     background-color: cornflowerblue;
-    transition: all 1s;
+    transition: all 0.5s;
     
 }

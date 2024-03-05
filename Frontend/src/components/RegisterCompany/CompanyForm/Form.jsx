@@ -1,13 +1,14 @@
 import { useState, useEffectt } from "react";
 import { useForm } from "react-hook-form";
 import { postCompany } from "../../../services/companiesService";
-import "../../../styles/CompanyForm.css"
+import "../../../styles/RegisterCompany.css"
 import validations from "../../../utils/validations";
 
 function Form() {
     const [focusedInput, setFocusedInput] = useState(false);
     const [errores, setErrores] = useState({});
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const logo = watch("logo");
 
     const updateErrors = (e) => {
         setErrores({
@@ -31,7 +32,7 @@ function Form() {
         setFocusedInput(null);
     }
 
-    const onSubmit = handleSubmit(async (data) => {
+    const onSubmit = handleSubmit(async (data) => {        
         let formData = new FormData();
 
         Object.entries(data).forEach(([key, value]) => {

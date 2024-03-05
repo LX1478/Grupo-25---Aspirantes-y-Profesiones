@@ -27,7 +27,7 @@ function Profile({ id }) {
       <div className="row align-items-start">
         <div className="col-md-4">
           <img
-            src={applicant.image}
+            src={"/images/applicants/" + applicant.image}
             className="mx-auto d-block"
             alt={applicant.name + " " + applicant.surname}
             style={{ width: "250px", borderRadius: "50%" }}
