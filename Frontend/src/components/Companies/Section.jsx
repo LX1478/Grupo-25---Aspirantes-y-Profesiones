@@ -7,38 +7,19 @@ import "../../styles/CompanySection.css"
 function Section() {
   const [companies, setCompanies] = useState([]);
 
-  useEffect(() => {
-    async function getCompaniesData() {
-      const data = await getCompanies();
-      setCompanies(data.data);
-
-    }
-
-<<<<<<< HEAD
-    getCompaniesData();
-  }, []);
-=======
-    return(
-        <section className="content companies">
-        <h2>Empresas</h2>
-        <div className="list-group shadow-sm p-3 mb-5 rounded text-center ">
-            
-            {Array.isArray(companies) && companies.map((company, i) => 
-            (<Company 
-                key={i}
-                id={company.id} 
-                logo={company.logo}  
-                name={company.name} 
-                location={company.location}
-                link={company.webSite}
-            />))}
->>>>>>> 2aa8c915b4ad08b8a4cd3ffb1fcfb9880f788572
+    useEffect(() => {
+      async function getCompaniesData(){
+        const data = await getCompanies();
+        setCompanies(data.data);
+      }
+      getCompaniesData();
+    },[]);
 
   return (
     <div className="content companies">
       <section className="container-fluid">
         <Link to={"/registro/empresa"}>
-            <button className="container-fluid btn btn-outline-primary registerLink">Registra tu empresa</button>
+          <button className="container-fluid btn btn-outline-primary registerLink">Registra tu empresa</button>
         </Link>
       </section>
 
@@ -48,6 +29,7 @@ function Section() {
         {Array.isArray(companies) && companies.map((company, i) =>
         (<Company
           key={i}
+          id={company.id}
           logo={company.logo}
           name={company.name}
           location={company.location}
