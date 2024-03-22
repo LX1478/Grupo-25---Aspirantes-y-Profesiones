@@ -18,11 +18,10 @@
     <li></li>
     <li></li>
     <li>
-        Utilización de la libreria "react hook form" para formularios de registro y sus validaciones 
-        <a>https://react-hook-form.com/get-started</a>
-    </li>
+        Utilización de la libreria <a href="https://react-hook-form.com/get-started">Reack Hook Form</a> para formularios de registro y sus validaciones 
+    </li>                                  
  </ul>
- 
+
  <h3>backend</h3>
  <ul>
     <li>Scripts sql de la creación e inserción de datos de la database en la ruta "/Backend/sql"</li>
@@ -32,7 +31,8 @@
  </ul>
 
  <h2>Equipo</h2>
- <h3>Mamaní Luis Carlos Manuel <a>https://github.com/LuisMPlus</a></h3>
+ <h3>Mamaní Luis Carlos Manuel. Github: <a href="https://github.com/LuisMPlus">LuisMPlus</a></h3>
 
  <h2>Conclusión</h2>
  <p>Enfoque en adquirir prácticas profesionales en la programación.</p>
+
