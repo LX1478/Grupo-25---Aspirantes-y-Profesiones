@@ -2,7 +2,16 @@
  <p>Este es un challenge propuesto por Digital House de Prácticas Profesionales.</p> 
  <p>Se trata de un dashboard hecho en react donde distintos aspirantes puedan publicar su perfil como professinal en las diferentes profesiones y datos de contacto. Con empresas ya asociadas en busca de determinados perfiles. Visibilidad para cualquier que entre al sitio web y pueda postularse con la posibilidad de obtener el trabajo de sus sueños.</p>
 
- <h2>Requerimientos</h2>
+ <h2>Tecnologías</h2>
+ <img src="https://img.shields.io/badge/React-333333?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
+ <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" alt="React Router Doom">
+ <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Boostrap">
+ <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Nodejs">
+ <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" alt="Express">
+ <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white" alt="Sequelize">
+ <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" alt="Mysql">
+
+
  <p>Utilización de Nodejs para el backend y react para el frontend. Con base de datos en mysql.</p>
 
  <h2>Instalación</h2>
