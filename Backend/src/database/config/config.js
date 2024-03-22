@@ -1,8 +1,8 @@
 module.exports = {
   "development": {
     "username": "root",
-    "password": null,
-    /* "password": "root", */
+    /* "password": null, */
+    "password": "zxcv",
     "roote": null,
     "database": "recruitingrh",
     "host": "127.0.0.1",
